@@ -16,11 +16,19 @@ public class MainFragment extends Fragment {
 
     Button playButton;
     Button stopButton;
+    AudioPlayer audioPlayer = new AudioPlayer();
 
     public MainFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(audioPlayer != null) {
+            audioPlayer.stop();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +37,21 @@ public class MainFragment extends Fragment {
 
         playButton = (Button) view.findViewById(R.id.playButtonId);
         stopButton = (Button) view.findViewById(R.id.stopButtonId);
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(audioPlayer != null){
+                    audioPlayer.play(getActivity());
+                }
+            }
+        });
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                audioPlayer.stop();
+            }
+        });
 
         return view;
     }
