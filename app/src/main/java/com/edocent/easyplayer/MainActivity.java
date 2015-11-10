@@ -1,5 +1,6 @@
 package com.edocent.easyplayer;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        /*Custom Code*/
+        loadMainFragment();
+    }
+
+    private void loadMainFragment() {
+        MainFragment mainFragment = new MainFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.mainFragmentId, mainFragment);
+        ft.commit();
     }
 
     @Override
